@@ -20,8 +20,16 @@ public class MemberServiceImpl implements MemberService{
 			return findMember.get();
 		else return null;
 	}
-
-
+	
+	@Override
+    public void addMember(Member member) {		//회원 추가
+        memberRepository.save(member);
+    }
+	
+	@Override
+    public boolean isIdAvailable(String id) {	//아이디 중복체크
+        return memberRepository.findById(id).isEmpty();
+    }
 
 
 }

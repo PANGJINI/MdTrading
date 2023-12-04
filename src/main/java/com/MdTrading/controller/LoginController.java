@@ -42,5 +42,19 @@ public class LoginController {
 		}
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();	//세션 종료
+		return "redirect:/";
+	}
+	
+//	@GetMapping("/logout")
+//	public String logout(SessionStatus status) {
+//		status.setComplete();	//세션 종료
+//		return "redirect:/";
+//	}
+	
+
+	
 
 }

@@ -1,0 +1,56 @@
+<html lang="kr">
+	<head>
+		<script>
+		// 비밀번호 일치 확인 함수
+        function checkPasswordMatch() {
+            var password = document.getElementsByName("password")[0].value;
+            var passwordCheck = document.getElementsByName("passwordCheck")[0].value;
+
+            var messageElement = document.getElementById("passwordCheckMessage");
+
+            if (password === passwordCheck) {
+                messageElement.innerText = "비밀번호가 일치합니다.";
+                messageElement.style.color = "green";
+                document.getElementById("signUpButton").disabled = false; // 비밀번호 일치 시 버튼 활성화
+            } else {
+                messageElement.innerText = "비밀번호가 다릅니다.";
+                messageElement.style.color = "red";
+                document.getElementById("signUpButton").disabled = true; // 비밀번호 불일치 시 버튼 비활성화
+            }
+        }
+		
+    	</script>
+    	
+	</head>
+	
+	<!-- 아이디(중복확인), 비밀번호, 비밀번호확인(일치확인), 이름(닉네임), 전화번호, 이메일, 회원가입 버튼 -->
+	<body>
+			<h1>회원가입</h1>
+			<form action="signUp" method="post">
+			*표시는 필수 항목입니다. <br>
+				<input type="text" name="id" placeholder="아이디*" required autofocus>
+				<input type="button" name="idCheck" value="중복확인" onclick="checkIdAvailability()"> <br>
+				<div th:text="${idCheckMessage}"></div> <br>
+				
+				<input type="password" name="password" placeholder="비밀번호*" oninput="checkPasswordMatch()" required> <br>
+				<input type="password" name="passwordCheck" placeholder="비밀번호확인*" oninput="checkPasswordMatch()" required> <br>
+				<div id="passwordCheckMessage"></div> <br>
+				
+				<input type="text" name="name" placeholder="이름(닉네임)*" required> <br>
+				
+				<select name="phone">
+				    <option value="010">010</option>
+				    <option value="011">011</option>
+				    <option value="019">019</option>
+				</select>
+				- <input type="text" name="phone_m" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" placeholder="전화번호*" required>
+				- <input type="text" name="phone_e" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" required> <br>
+				
+				<input type="email" name="email" placeholder="이메일* example@gmail.com" required> <br>
+				<input type="submit" value="회원가입" id=signUpButton disabled>
+			</form>
+			
+	</body>
+
+
+</html>

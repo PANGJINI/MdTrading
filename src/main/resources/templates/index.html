@@ -1,14 +1,32 @@
 <html lang="kr" xmlns:th="http://www.thymelear.org">
 	<head>
-		
+		<script type="text/javascript">
+			//로그아웃 알림창
+ 	        function confirmLogout() {
+	            var result = confirm("로그아웃 하시겠습니까?");
+	            if (result) {
+	                window.location.href = "/logout";
+	            }
+	        }
+	    </script>
 	</head>
 	
 	<body>
 		<center>
-		<h1>메인👊👊</h1>
-		<hr>
-		<h3><a href="loginView">로그인</a></h3>
+			<h1>메인👊👊</h1>
+			<hr>
+			<!-- 로그인 전 출력 항목 : 로그인, 회원가입 -->
+			<a th:if="${session['member'] == null}" th:href="@{/loginView}">로그인</a>
+			<a th:if="${session['member'] == null}" th:href="@{/signUpView}">회원가입</a>
+			
+			<!-- 로그인 후 출력 항목 :  유저이름, 글쓰기, 로그아웃 -->
+			<div th:if="${session['member'] != null}">
+				<font color="pink" th:text="${session['member'].name}">guest</font>님
+			</div>
+			<a th:if="${session['member'] != null}" >글쓰기</a>
+			<a th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
 		</center>
+
 		
 	</body>
 </html>
