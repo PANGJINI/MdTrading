@@ -2,6 +2,7 @@
 	<head>
 		<script>
 		// 비밀번호 일치 확인 함수
+		// 비밀번호가 일치하는 경우에만 회원가입 버튼이 활성화 됨
         function checkPasswordMatch() {
             var password = document.getElementsByName("password")[0].value;
             var passwordCheck = document.getElementsByName("passwordCheck")[0].value;
@@ -19,11 +20,12 @@
             }
         }
 		
+		
     	</script>
     	
 	</head>
 	
-	<!-- 아이디(중복확인), 비밀번호, 비밀번호확인(일치확인), 이름(닉네임), 전화번호, 이메일, 회원가입 버튼 -->
+
 	<body>
 			<h1>회원가입</h1>
 			<form action="signUp" method="post">
