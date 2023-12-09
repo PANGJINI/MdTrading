@@ -8,6 +8,8 @@
 	                window.location.href = "/logout";
 	            }
 	        }
+			
+ 	       
 	    </script>
     	<meta charset="utf-8">
     	<title>Goods</title>
@@ -36,11 +38,11 @@
 
               <nav role="navigation">
                   <ul class="menu">
-                    <li><a href="#">list 1</a></li>
-                    <li><a href="#">list 2</a></li>
-                    <li><a href="#">list 3</a></li>
-                    <li><a href="#">list 4</a></li>
-                    <li><a href="#">list 5</a></li>
+                    <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
+                    <li><a href="#">음반</a></li>
+                    <li><a href="#">응원도구</a></li>
+                    <li><a href="#">포토카드</a></li>
+                    <li><a href="#">인형/피규어</a></li>
                   </ul>
                 </nav>
             </div>
@@ -48,6 +50,7 @@
         
         <main>
           <a th:if="${session['member'] != null}" th:href="@{/insertProduct}" href="insertProduct.html">글쓰기</a>
+          <div id="productList"></div>
         </main>
         
         
