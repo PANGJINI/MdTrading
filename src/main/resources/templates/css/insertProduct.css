@@ -102,108 +102,102 @@ main{
   margin:0 auto;
 }
 
-.sup{
-  color: red;
-}
-
 /*표 타이틀 부분*/
 .txtTable{ 
   width: 100%;
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
 }
 .txtTable th{
   height: 80px;
   line-height: 80px;
   font-size: 30px;
 }
-.txtTable td{
-  text-align: right;
-  font-size: 12px;
-  height: 40px;
-  line-height: 40px;
-}
+.txtTable a{margin-left: 30px;}
 
-.tableWrap{    
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
+.mainWrap{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
 }
 /*사용자 회원가입 내용 작성 부분*/
-.singUpTable{
+.insertTable{
   text-align: center;
-  width: 100%;
+  width: 20%;
   color: black;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
   border-collapse: collapse;
 }
-.singUpTable th{
+.insertTable th{
   text-align: left;
+  padding-left: 20px;
 }
-.singUpTable td:first-child{
-  width: 12%;
-  text-align: left;
-  background-color: rgba(225, 230, 101, 0.1);
-  padding: 10px;
-} 
-.singUpTable td:nth-child(2){
-  width: 15%;
-  padding: 10px;
-}  
-.singUpTable td:nth-child(3){
-  width: 1%;
-}   
-.singUpTable td:nth-child(4){
-  width: 20%;
-  padding: 10px;
-  text-align: left;
-}   
-.singUpTable td:nth-child(5){
-  width: 50%;
-} 
-.singUpTable td{
+.insertTable tr:first-child{padding-top: 20px;}
+.insertTable td{
   height: 30px;
   line-height: 30px;
-  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 25px;
 } 
-.singUpTable tr{ border-bottom: 1px solid rgba(0,0,0,0.1); }
-
-#btnId{
-  border: solid 1px;
-  width: 100%;
-  height: 70%;
-  padding: 8px;
-  background-color: white;
-  border-radius: 4px;
-  font-weight: bold;
-} 
-
-#signUpButton{
-  border: none;
-  width: 180px;
-  padding: 8px;
-  color: black;
-  background-color: rgba(225, 230, 101, 0.7);
-  border: solid 2px;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: bold;
-}
-#signUpButton:hover{
-  background-color: white;
-  cursor: pointer;
-}
+.thPaddingTop{padding-top: 30px;}
+select{padding-right: 10px;}
 
 .inputClass{
   height: 30px;
   line-height: 30px;
   padding-left: 10px;
+  width: 85%;
 }
-.callClass{
-  height: 25px;
-  line-height: 25px;
-  padding-left: 2px;
+.inputClass:last-child{padding-left: 3px;}
+
+.txtArrTable{
+  text-align: center;
+  width: 50%;
+  color: black;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  border-collapse: collapse;
+}
+.txtArrTable th{
+  text-align: left;
+  padding-left: 20px;
+}
+.txtArrTable p{
+  font-weight: 100;
+  text-align: right;
+  padding-right: 25px;
+  font-size: 12px;
+}
+.txtArrTable td{
+  height: 30px;
+  line-height: 30px;
+  padding-top: 5px;
+  padding-bottom: 25px;
+} 
+.txtArrTable textarea{
+  height: 427px;
+  width: 93%;
+  resize: none;
+  padding: 15px;
+}
+
+
+.Btn{
+  border: none;
+  width: 180px;
+  padding: 8px;
+  background-color: white;
+  color: black;
+  border: solid 2px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.Btn:hover{
+  background-color: rgba(225, 230, 101, 0.7);
+  cursor: pointer;
 }
 
 

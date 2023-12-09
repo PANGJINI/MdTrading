@@ -1,37 +1,90 @@
 <html lang="kr" xmlns:th="http://www.thymelear.org">
 
 	<head>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="css/productList.css">
 		<style>
-			.item_list {
-				display: flex;
-				flex-wrap: wrap;	/* 상위요소의 너비보다 하위요소의 너비가 더 클 경우 줄바꿈 */
-				justify-content: space-between;	/* 수평방향 정렬 */
-			}
-			.item_list .card {
-				border: 1px solid #eee;
-				height: 350px;
-				width: 250px;
-				padding: 5px;
-				margin-bottom: 10px;
-			}
+			
 		</style>
 		
 	</head>
 	
 	<body>
-		<h1> 전체 상품 보여주깅깅 </h1>
-		<div class="item_list">
-			<div class="card" th:each="product, state:${productList}">
-				<div class="img">
-					<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
-				</div>
-				<div class="text">
-					<h2 th:text="${product.productTitle}">제목</h2>
-					<p th:text="${product.productPrice + '\'}">가격</p>
-					<p th:text="${product.productQuantity + '개'}">수량</p>
-				</div>
-			</div>
-		</div>
+		<header>
+            <div class="headerWrap">
+              <div class="logWrap">
+                <div class="logo">
+                  <a href="index.html"><img src="/img/Logo.png" alt="로고"></a>
+                </div>
+                
+                <div class="loginWrap">
+                <!-- 로그인 전 출력 항목 : 로그인, 회원가입 -->
+                <!-- 로그인 후 출력 항목 :  유저이름, 글쓰기, 로그아웃 -->
+                 <div th:if="${session['member'] != null}">
+                    <font th:text="${session['member'].name}">guest</font> 님, 반갑습니다!
+                 </div>
+                  <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
+                  <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
+                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
+                </div>
+              </div>
+
+              <nav role="navigation">
+                  <ul class="menu">
+                    <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
+                    <li><a href="#">음반</a></li>
+                    <li><a href="#">응원도구</a></li>
+                    <li><a href="#">포토카드</a></li>
+                    <li><a href="#">인형/피규어</a></li>
+                  </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <main>
+          <div class="item_list">
+              <div class="card" th:each="product, state:${productList}">
+                  <div class="productImg">
+                      <img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+                  </div>
+                  <table class="productText">
+                    <tr>
+                      <th colspan="2">
+                        <div th:text="${product.productTitle}">제목</div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div th:text="${product.productPrice + ' \'}">99999\</div>
+                      </td>
+                      <td>
+                        <div th:text="${product.productQuantity + ' 개'}">999개</div>
+                      </td>
+                    </tr>
+                  </table>
+              </div>
+          </div>
+        </main>
+		
+		<footer>
+          <div class="footerWrap">
+            <div class="footerLogo">
+              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
+            </div>
+
+            <div class="copy">
+              ⓒ Now there is no place to retreat anymore. ALL RIGHTS RESERVED 
+            </div>
+
+            <div class="YT">
+               <ul> 
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+               </ul>
+            </div>
+          </div>
+        </footer>
 	</body>
 	
 
