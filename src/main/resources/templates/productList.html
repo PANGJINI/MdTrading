@@ -24,6 +24,7 @@
 			<div class="card" th:each="product, state:${productList}">
 				<div class="img">
 					<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+					<!-- "'data:image/jpeg;base64,'+${playerImg}" -->
 				</div>
 				<div class="text">
 					<h2 th:text="${product.productTitle}">제목</h2>
