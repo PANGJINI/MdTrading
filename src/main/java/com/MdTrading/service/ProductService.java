@@ -7,5 +7,5 @@ import com.MdTrading.domain.Product;
 public interface ProductService {
 	public void insertProduct(Product product);
 	public List<Product> getProductList();
-	Product getProductById(int productId);
+	public Product getProductById(Product product);
 }

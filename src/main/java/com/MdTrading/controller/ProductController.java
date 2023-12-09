@@ -47,18 +47,22 @@ public class ProductController {
     }
     
     //상세 정보
-    @GetMapping("/productDetail/{productId}")
-    public String productDetail(@PathVariable int productId, Model model) {
-    	
-        // productId에 해당하는 제품 정보를 데이터베이스에서 가져오기
-        Product product = productService.getProductById(productId);
-
-        // 제품 정보를 모델에 추가하여 뷰로 전달
-        model.addAttribute("product", product);
-
-        // 상세 페이지 뷰의 이름 반환
-        return "productDetail";
+    @GetMapping("/getProduct")
+    public String getProductDetail(Product product, Model model) {
+    	model.addAttribute("product", productService.getProductById(product));
+    	return "productDetail";
     }
+//    public String productDetail(@PathVariable int productId, Model model) {
+//    	
+//        // productId에 해당하는 제품 정보를 데이터베이스에서 가져오기
+//        Product product = productService.getProductById(productId);
+//
+//        // 제품 정보를 모델에 추가하여 뷰로 전달
+//        model.addAttribute("product", product);
+//
+//        // 상세 페이지 뷰의 이름 반환
+//        return "productDetail";
+//    }
     
     
     

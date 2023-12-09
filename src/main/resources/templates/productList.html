@@ -1,4 +1,4 @@
-<html lang="kr" xmlns:th="http://www.thymelear.org">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<style>
@@ -27,8 +27,8 @@
 					<!-- "'data:image/jpeg;base64,'+${playerImg}" -->
 				</div>
 				<div class="text">
-					<a th:href="@{'/product/' + ${product.productId}}">
-					<h2 th:text="${product.productTitle}">제목</h2> </a>
+					<a th:href="@{/getProduct(productId=${product.productId})}"
+						th:text="${product.productTitle}"> 제목 </a>
 					<p th:text="${product.productPrice + '\'}">가격</p>
 					<p th:text="${product.productQuantity + '개'}">수량</p>
 				</div>

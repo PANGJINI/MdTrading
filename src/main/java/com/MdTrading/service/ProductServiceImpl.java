@@ -25,9 +25,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	// 상품 상세 정보 가져오기
-    public Product getProductById(int productId) {
-        return productRepo.findById(productId)
-                .orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다. ID: " + productId));
+    public Product getProductById(Product product) {
+        return productRepo.findById(product.getProductId()).get();
+                //.orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다. ID: " + productId));
     }
 	
 }
