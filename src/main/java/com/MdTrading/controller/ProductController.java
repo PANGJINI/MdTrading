@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +30,8 @@ public class ProductController {
 	
 	//전체 게시글 보여주기
 	@RequestMapping("/getProductList")
-	public String getProductList(Product product, Model model) {
-		model.addAttribute("productList", productService.getProductList(product));
+	public String getProductList(Model model) {
+		model.addAttribute("productList", productService.getProductList());
 		return "productList";
 	}
 	
@@ -44,6 +45,25 @@ public class ProductController {
     	
     	return "insertProduct";
     }
+    
+    //상세 정보
+    @GetMapping("/getProduct")
+    public String getProductDetail(Product product, Model model) {
+    	model.addAttribute("product", productService.getProductById(product));
+    	return "productDetail";
+    }
+//    public String productDetail(@PathVariable int productId, Model model) {
+//    	
+//        // productId에 해당하는 제품 정보를 데이터베이스에서 가져오기
+//        Product product = productService.getProductById(productId);
+//
+//        // 제품 정보를 모델에 추가하여 뷰로 전달
+//        model.addAttribute("product", product);
+//
+//        // 상세 페이지 뷰의 이름 반환
+//        return "productDetail";
+//    }
+    
     
     
     //게시물 등록하기
@@ -72,6 +92,7 @@ public class ProductController {
     	return mav;
     }
     
+   
     
     
    
