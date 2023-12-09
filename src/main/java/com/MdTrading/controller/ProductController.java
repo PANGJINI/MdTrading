@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +27,14 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	//전체 게시글 보여주기
+	@RequestMapping("/getProductList")
+	public String getProductList(Product product, Model model) {
+		model.addAttribute("productList", productService.getProductList(product));
+		return "productList";
+	}
+	
+	
 	//글등록 화면으로 이동
     @GetMapping("/insertProduct")
     public String insertProductView(Model model, HttpSession session) {
@@ -35,6 +44,7 @@ public class ProductController {
     	
     	return "insertProduct";
     }
+    
     
     //게시물 등록하기
     @PostMapping("/insertProduct")

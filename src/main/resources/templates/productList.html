@@ -1,0 +1,38 @@
+<html lang="kr" xmlns:th="http://www.thymelear.org">
+
+	<head>
+		<style>
+			.item_list {
+				display: flex;
+				flex-wrap: wrap;	/* 상위요소의 너비보다 하위요소의 너비가 더 클 경우 줄바꿈 */
+				justify-content: space-between;	/* 수평방향 정렬 */
+			}
+			.item_list .card {
+				border: 1px solid #eee;
+				height: 350px;
+				width: 250px;
+				padding: 5px;
+				margin-bottom: 10px;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+		<h1> 전체 상품 보여주깅깅 </h1>
+		<div class="item_list">
+			<div class="card" th:each="product, state:${productList}">
+				<div class="img">
+					<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+				</div>
+				<div class="text">
+					<h2 th:text="${product.productTitle}">제목</h2>
+					<p th:text="${product.productPrice + '\'}">가격</p>
+					<p th:text="${product.productQuantity + '개'}">수량</p>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+
+</html>

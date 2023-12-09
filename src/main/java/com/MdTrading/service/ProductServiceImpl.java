@@ -19,6 +19,7 @@ public class ProductServiceImpl implements ProductService {
 		productRepo.save(product);
 	}
 	
+	//전체 상품 보여주기
 	public List<Product> getProductList(Product product) {
 		return (List<Product>)productRepo.findAll();
 	}
