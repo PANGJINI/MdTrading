@@ -66,18 +66,29 @@
             <!-- 파일 업로드와 같이 바이너리 데이터를 전송해야 할 경우 enctype="multipart/form-data"-->
              <div class="mainWrap">
                <table class="insertTable">
-                 <tr><th class="thPaddingTop">제목</th></tr>
+                 <tr>
+                   <th class="thPaddingTop">제목</th>
+                   <th class="thPaddingTop">상품 설명</th>
+                 </tr>
                  <tr>
                    <td>
                      <input type="text" class="inputClass" name="productTitle"/>
                     </td>
+                   <td rowspan="11">
+                    <p id="charLength">0 / 500</p>
+                     <textarea name="productContent" id="content" placeholder="(최대 500자)" cols="50" rows="10" maxlength="500" oninput="checkLength()"></textarea>
+                   </td>
                  </tr>
 
-                 <tr><th>작성자</th></tr>
+                 <tr>
+                   <th>작성자</th>
+                   
+                 </tr>
                  <tr>
                    <td>
                      <input type="text" class="inputClass" name="name" th:value="${currentMember.name}" disabled/>
                    </td>
+                   
                  </tr>
 
                  <tr><th>카테고리</th></tr>
@@ -109,19 +120,9 @@
                  <tr><th>이미지 등록</th></tr>
                  <tr>
                    <td>
-                     <input type="file" class="inputClass" name="imageFile" accept="image/*"/>
+                     <input type="file"  id="inputFile" class="inputClass" name="imageFile" accept="image/*"/>
                    </td>
                  </tr>
-               </table>
-
-               <table class="txtArrTable">
-                <tr><th class="thPaddingTop">상품 설명</th></tr>
-                 <tr><th><p id="charLength">0 / 500</p></th></tr>
-                 <tr>
-                   <td>
-                     <textarea name="productContent" id="content" placeholder="(최대 500자)" cols="50" rows="10" maxlength="500" oninput="checkLength()"></textarea>
-                   </td>
-                 </tr>               
                </table>
              </div>
              <table class="txtTable">      
