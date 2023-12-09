@@ -19,7 +19,7 @@ public class Product {
 	@GeneratedValue
 	private int productId;				//상품 번호
 	private String productTitle;		//상품 제목
-	private String productCatetory;		//상품 카테고리
+	private String productCategory;		//상품 카테고리
 	private String userName;			//등록자 닉네임
 	private String productPrice;		//상품 가격
 	private String productQuantity;		//상품 수량

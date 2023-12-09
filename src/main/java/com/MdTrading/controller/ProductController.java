@@ -3,6 +3,7 @@ package com.MdTrading.controller;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,19 @@ public class ProductController {
 	
 	//전체 게시글 보여주기
 	@RequestMapping("/getProductList")
-	public String getProductList(Model model) {
-		model.addAttribute("productList", productService.getProductList());
+	public String getProductList(@RequestParam(name = "productCategory", required = false)
+									String productCategory, Model model) {
+		List<Product> productList;
+		if (productCategory != null) {
+            productList = productService.getProductListByCategory(productCategory);
+        } else {
+            productList = productService.getProductList();
+        }
+		model.addAttribute("productList", productList);
+		//model.addAttribute("productList", productService.getProductList());
+		//model.addAttribute("categories", productService.findAllCategories());
+		model.addAttribute("categories", productService.findAllCategories());
+	       
 		return "productList";
 	}
 	
@@ -86,7 +98,7 @@ public class ProductController {
     	productService.insertProduct(product);
     	
     	// 게시물 등록 완료시 alert 메시지 보여주고 메인으로 이동 
-    	mav.addObject("data", new Message("게시물 등록이 완료되었습니다.", "/"));
+    	mav.addObject("data", new Message("게시물 등록이 완료되었습니다.", "forward:productList"));
     	mav.setViewName("Message");
     			
     	return mav;

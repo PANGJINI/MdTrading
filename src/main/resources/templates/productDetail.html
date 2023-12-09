@@ -11,12 +11,14 @@
 				<div class="img">
 					<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
 				</div>
-				<p th:text="${'카테고리: ' + product.productCatetory}"/>
+				<p th:text="${'카테고리: ' + product.productCategory}"/>
     			<p th:text="${'등록자 닉네임: ' + product.userName}"/>
     			<p th:text="${'가격: ' + product.productPrice + '원'}"/>
     			<p th:text="${'수량: ' + product.productQuantity + '개'}"/>
     			<p th:text="${'설명: ' + product.productContent}"/>
     			<p th:text="${'등록일: ' + product.productDate}"/>
 		</div>
+		
+		<div> </div>
 	</body>
 </html>

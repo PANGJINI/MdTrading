@@ -47,10 +47,10 @@
               <nav role="navigation">
                   <ul class="menu">
                     <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
-                    <li><a href="#">음반</a></li>
-                    <li><a href="#">응원도구</a></li>
-                    <li><a href="#">포토카드</a></li>
-                    <li><a href="#">인형/피규어</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='album')}">음반</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='fanLight')}">응원도구</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='photoCard')}">포토카드</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='doll')}">인형/피규어</a></li>
                   </ul>
                 </nav>
             </div>
@@ -94,7 +94,7 @@
                  <tr><th>카테고리</th></tr>
                  <tr>
                    <td>
-                     <select class="inputClass" name="productCatetory">
+                     <select class="inputClass" name="productCategory">
                         <option value="album">음반</option>
                         <option value="fanLight">응원도구</option>
                         <option value="photoCard">포토카드</option>

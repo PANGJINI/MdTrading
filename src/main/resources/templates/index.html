@@ -15,7 +15,24 @@
     	<title>Goods</title>
     	<link rel="stylesheet" href="css/index.css?after">
     	<style>
-			
+			.product-link {
+				position: relative;
+			    top: 580px;
+			    left: 250px;
+			    width: 200px;
+			    height: 40px;
+			    background: white;
+			    color: #ffffff;
+			    font-weight: bold;
+			    border-radius: 20px;
+    			border: 2px solid #000000;
+    			display: flex;
+			    align-items: center;
+			    justify-content: center;
+			}
+			.product-link a {
+				color: #000000;
+			}
 		</style>
 	</head>
 	
@@ -42,18 +59,20 @@
               <nav role="navigation">
                   <ul class="menu">
                     <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
-                    <li><a href="#">음반</a></li>
-                    <li><a href="#">응원도구</a></li>
-                    <li><a href="#">포토카드</a></li>
-                    <li><a href="#">인형/피규어</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='album')}">음반</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='fanLight')}">응원도구</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='photoCard')}">포토카드</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='doll')}">인형/피규어</a></li>
                   </ul>
                 </nav>
             </div>
         </header>
         
-        <main>
+        <main style="background-image: url('/img/indexImage.PNG'); background-size: cover; background-position: center; height: 100vh;">
           <a th:if="${session['member'] != null}" th:href="@{/insertProduct}" href="insertProduct.html">글쓰기</a>
-          <div id="productList"></div>
+          <div class="product-link">
+          	<a th:href="@{/getProductList}">SHOP NOW</a>
+          </div>
         </main>
         
         
