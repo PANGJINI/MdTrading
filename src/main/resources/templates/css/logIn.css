@@ -110,6 +110,12 @@ main{
   font-size: 15px;
   font-weight: bold;
 }
+.loginBtn:hover{
+  background-color: black;
+  color: rgb(225, 230, 101);
+  border-color: black;
+  cursor: pointer;
+}
 
 
 /*footer*/

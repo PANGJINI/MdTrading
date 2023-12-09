@@ -63,6 +63,56 @@ header{
     align-items: center;
 }
 
+main{
+  width:1200px;
+  margin:0 auto;
+}
+
+.item_list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 40px;
+}
+
+.card {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+  height: 350px;
+  width: 250px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.productImg{
+  height: 80%;
+  width: 100%;
+  align-items: center;
+  border-radius: 4px;
+}
+.productText{
+  margin-top: 5px;
+  height: 18%;
+  width: 100%;
+  text-align: center;
+}
+.productText th div{
+  font-weight: bold;
+  font-size: 18px;
+  overflow: hidden;
+  height: 20px;
+  line-height: 20px;
+  text-align: left;
+  padding-left: 5px;
+}
+.productText td{ 
+  font-size: 13px;
+  text-align: right;
+}
+.productText td:nth-child(2){
+  width: 50px;
+  padding-right: 5px;
+}
+
 /*menu*/
 nav {
   display: flex; 
@@ -96,123 +146,10 @@ ul, li {
   visibility: visible;
 }
 
-/*main*/
-main{
-  width:1200px;
-  margin:0 auto;
-}
-
-.sup{
-  color: red;
-}
-
-/*표 타이틀 부분*/
-.txtTable{ 
-  width: 100%;
-  margin-top: 30px;
-}
-.txtTable th{
-  height: 80px;
-  line-height: 80px;
-  font-size: 30px;
-}
-.txtTable td{
-  text-align: right;
-  font-size: 12px;
-  height: 40px;
-  line-height: 40px;
-}
-
-.tableWrap{    
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-/*사용자 회원가입 내용 작성 부분*/
-.singUpTable{
-  text-align: center;
-  width: 100%;
-  color: black;
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
-  border-collapse: collapse;
-}
-.singUpTable th{
-  text-align: left;
-}
-.singUpTable td:first-child{
-  width: 12%;
-  text-align: left;
-  background-color: rgba(225, 230, 101, 0.1);
-  padding: 10px;
-} 
-.singUpTable td:nth-child(2){
-  width: 15%;
-  padding: 10px;
-}  
-.singUpTable td:nth-child(3){
-  width: 1%;
-}   
-.singUpTable td:nth-child(4){
-  width: 20%;
-  padding: 10px;
-  text-align: left;
-}   
-.singUpTable td:nth-child(5){
-  width: 50%;
-} 
-.singUpTable td{
-  height: 30px;
-  line-height: 30px;
-  background-color: white;
-} 
-.singUpTable tr{ border-bottom: 1px solid rgba(0,0,0,0.1); }
-
-#btnId{
-  border: solid 1px;
-  width: 100%;
-  height: 70%;
-  padding: 8px;
-  background-color: white;
-  border-radius: 4px;
-  font-weight: bold;
-} 
-
-#signUpButton{
-  border: none;
-  width: 180px;
-  padding: 8px;
-  color: black;
-  background-color: rgba(225, 230, 101, 0.7);
-  border: solid 2px;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: bold;
-}
-#signUpButton:hover{
-  background-color: white;
-  cursor: pointer;
-}
-
-.inputClass{
-  height: 30px;
-  line-height: 30px;
-  padding-left: 10px;
-}
-.callClass{
-  height: 25px;
-  line-height: 25px;
-  padding-left: 2px;
-}
-
-
-
 /*footer*/
 footer{
   width: 100%;
   height: 100px;
-  margin-top: 50px;
   background: rgb(56, 56, 56);
 }
 .footerWrap{

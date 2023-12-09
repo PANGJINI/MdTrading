@@ -16,35 +16,149 @@
 		    }
 		}
 		</script>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="css/insertProduct.css">
+    	<style>
+			
+		</style>
 	</head>
 	
 	
 	<body>
-		<h1> 상품 올려버리기 </h1>
-		
-		<form action="insertProduct" method="post" enctype="multipart/form-data">
-		<!-- 파일 업로드와 같이 바이너리 데이터를 전송해야 할 경우 enctype="multipart/form-data"-->
+	  <header>
+            <div class="headerWrap">
+              <div class="logWrap">
+                <div class="logo">
+                  <a href="index.html"><img src="/img/Logo.png" alt="로고"></a>
+                </div>
+                
+                <div class="loginWrap">
+                <!-- 로그인 전 출력 항목 : 로그인, 회원가입 -->
+                <!-- 로그인 후 출력 항목 :  유저이름, 글쓰기, 로그아웃 -->
+                 <div th:if="${session['member'] != null}">
+                    <font th:text="${session['member'].name}">guest</font> 님, 반갑습니다!
+                 </div>
+                  <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
+                  <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
+                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
+                </div>
+              </div>
 
-			<input type="text" name="productTitle" placeholder="제목"/> <br>
-			<input type="text" name="name" th:value="${currentMember.name}" disabled/> <br>
-			카테고리
-			<select name="productCatetory">
-                <option value="album">음반</option>
-                <option value="fanLight">응원도구</option>
-                <option value="photoCard">포토카드</option>
-                <option value="doll">인형, 피규어</option>
-			</select> <br>
-			<input type="text" name="productPrice" placeholder="가격" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/> <br>
-			<input type="text" name="productQuantity" placeholder="수량(최대 999개)" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)"/> <br>
-			<textarea name="productContent" id="content" placeholder="상품 설명(최대 500자)" cols="50" rows="10" maxlength="500" oninput="checkLength()"></textarea> <br>
-			<p id="charLength">0 / 500</p>
-			
-			파일업로드<input type="file" name="imageFile" accept="image/*"/> <br>
-			<input type="submit" value="상품 등록하기">
+              <nav role="navigation">
+                  <ul class="menu">
+                    <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
+                    <li><a href="#">음반</a></li>
+                    <li><a href="#">응원도구</a></li>
+                    <li><a href="#">포토카드</a></li>
+                    <li><a href="#">인형/피규어</a></li>
+                  </ul>
+                </nav>
+            </div>
+        </header>
+        
+		<main>
+           <table class="txtTable">
+            <tr>
+              <th colspan="4">상품 등록</th>
+            </tr>
+          </table>
+           <form action="insertProduct" method="post" enctype="multipart/form-data">
+            <!-- 파일 업로드와 같이 바이너리 데이터를 전송해야 할 경우 enctype="multipart/form-data"-->
+             <div class="mainWrap">
+               <table class="insertTable">
+                 <tr><th class="thPaddingTop">제목</th></tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="productTitle"/>
+                    </td>
+                 </tr>
 
-		</form>
-			 
-		<a th:href ="@{/}">메인 페이지로 이동</a>
+                 <tr><th>작성자</th></tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="name" th:value="${currentMember.name}" disabled/>
+                   </td>
+                 </tr>
+
+                 <tr><th>카테고리</th></tr>
+                 <tr>
+                   <td>
+                     <select class="inputClass" name="productCatetory">
+                        <option value="album">음반</option>
+                        <option value="fanLight">응원도구</option>
+                        <option value="photoCard">포토카드</option>
+                        <option value="doll">인형, 피규어</option>
+                    </select>
+                  </td>
+                 </tr>
+
+                 <tr><th>가격</th></tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="productPrice" placeholder="(숫자만 입력)" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>
+                   </td>
+                 </tr>
+
+                 <tr><th>수량</th></tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="productQuantity" placeholder="(최대 999개)" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)"/>
+                   </td>
+                 </tr>
+
+                 <tr><th>이미지 등록</th></tr>
+                 <tr>
+                   <td>
+                     <input type="file" class="inputClass" name="imageFile" accept="image/*"/>
+                   </td>
+                 </tr>
+               </table>
+
+               <table class="txtArrTable">
+                <tr><th class="thPaddingTop">상품 설명</th></tr>
+                 <tr><th><p id="charLength">0 / 500</p></th></tr>
+                 <tr>
+                   <td>
+                     <textarea name="productContent" id="content" placeholder="(최대 500자)" cols="50" rows="10" maxlength="500" oninput="checkLength()"></textarea>
+                   </td>
+                 </tr>               
+               </table>
+             </div>
+             <table class="txtTable">      
+               <tr>
+                <th></th>
+                <td>
+					<input type="submit" class="Btn" value="상품 등록하기">
+                </td>
+                 <td>
+					<a th:href ="@{/}"><input type="button" class="Btn" value="메인 페이지"></a>
+                 </td>
+                <th></th>
+               </tr>
+             </table>
+           </form>
+        </main>
+        
+        
+        <footer>
+          <div class="footerWrap">
+            <div class="footerLogo">
+              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
+            </div>
+
+            <div class="copy">
+              ⓒ Now there is no place to retreat anymore. ALL RIGHTS RESERVED 
+            </div>
+
+            <div class="YT">
+               <ul> 
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+               </ul>
+            </div>
+          </div>
+        </footer>	
 
 	</body>
 	</html>
