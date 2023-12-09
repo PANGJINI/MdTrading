@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script>
+		//상품 설명시 현재 작성 글자수 보여주고, 500자 초과할 경우 초과된 부분 잘라내는 함수
+		function checkLength() {
+			var textarea = document.getElementById("content");
+		    var charCount = document.getElementById("charLength");
+		    var maxLength = parseInt(textarea.getAttribute("maxlength"));
+		    var currentLength = textarea.value.length;
+		
+		    charCount.textContent = currentLength + ' / ' + maxLength;
+		    if (currentLength > maxLength) {	//초과된 부분 잘라내기
+		        textarea.value = textarea.value.substring(0, maxLength);
+		        charCount.textContent = maxLength + ' / ' + maxLength;
+		    }
+		}
+		</script>
+	</head>
+	
+	
+	<body>
+		<h1> 상품 올려버리기 </h1>
+		
+		<form action="insertProduct" method="post" enctype="multipart/form-data">
+		<!-- 파일 업로드와 같이 바이너리 데이터를 전송해야 할 경우 enctype="multipart/form-data"-->
+
+			<input type="text" name="productTitle" placeholder="제목"/> <br>
+			<input type="text" name="name" th:value="${currentMember.name}" disabled/> <br>
+			카테고리
+			<select name="productCatetory">
+                <option value="album">음반</option>
+                <option value="fanLight">응원도구</option>
+                <option value="photoCard">포토카드</option>
+                <option value="doll">인형, 피규어</option>
+			</select> <br>
+			<input type="text" name="productPrice" placeholder="가격" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/> <br>
+			<input type="text" name="productQuantity" placeholder="수량(최대 999개)" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)"/> <br>
+			<textarea name="productContent" id="content" placeholder="상품 설명(최대 500자)" cols="50" rows="10" maxlength="500" oninput="checkLength()"></textarea> <br>
+			<p id="charLength">0 / 500</p>
+			
+			파일업로드<input type="file" name="imageFile" accept="image/*"/> <br>
+			<input type="submit" value="상품 등록하기">
+
+		</form>
+			 
+			  <!-- <a th:href ="@{/getBoardList}"> 글목록</a> -->
+
+	</body>
+	</html>

@@ -22,11 +22,13 @@ public class SignUpController {
 	@Autowired
 	private MemberService memberService;
 	
+	// 회원가입 화면 열기
 	@RequestMapping("/signUpView")
 	public String signUpHtml() {
 		return "signUp";
 	}
 	
+	// 회원가입 하기
 	@PostMapping("/signUp")
 	public ModelAndView signUp(@RequestParam(name = "id") String id,
 		    @RequestParam(name = "password") String password,

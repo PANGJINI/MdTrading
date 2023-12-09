@@ -12,9 +12,6 @@
     	<meta charset="utf-8">
     	<title>Goods</title>
     	<link rel="stylesheet" href="css/index.css?after">
-    	<style>
-            
-        </style>
 	</head>
 	
 	<body>
@@ -50,7 +47,7 @@
         </header>
         
         <main>
-          <a th:if="${session['member'] != null}" >글쓰기</a>
+          <a th:if="${session['member'] != null}" th:href="@{/insertProduct}" href="insertProduct.html">글쓰기</a>
         </main>
         
         
