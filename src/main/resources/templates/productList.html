@@ -1,4 +1,4 @@
-<html lang="kr" xmlns:th="http://www.thymelear.org">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
     	<meta charset="utf-8">
@@ -10,6 +10,7 @@
 	</head>
 	
 	<body>
+
 		<header>
             <div class="headerWrap">
               <div class="logWrap">
@@ -46,11 +47,14 @@
               <div class="card" th:each="product, state:${productList}">
                   <div class="productImg">
                       <img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+                      <!-- "'data:image/jpeg;base64,'+${playerImg}" -->
                   </div>
                   <table class="productText">
                     <tr>
                       <th colspan="2">
-                        <div th:text="${product.productTitle}">제목</div>
+                        <div>
+                         	<a th:href="@{/getProduct(productId=${product.productId})}" th:text="${product.productTitle}"></a>
+                         </div>
                       </th>
                     </tr>
                     <tr>
@@ -85,6 +89,7 @@
             </div>
           </div>
         </footer>
+
 	</body>
 	
 

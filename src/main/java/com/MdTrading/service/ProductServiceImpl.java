@@ -20,8 +20,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	//전체 상품 보여주기
-	public List<Product> getProductList(Product product) {
+	public List<Product> getProductList() {
 		return (List<Product>)productRepo.findAll();
 	}
 
+	// 상품 상세 정보 가져오기
+    public Product getProductById(Product product) {
+        return productRepo.findById(product.getProductId()).get();
+                //.orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다. ID: " + productId));
+    }
+	
 }

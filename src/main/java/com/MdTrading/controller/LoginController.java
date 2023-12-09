@@ -48,6 +48,7 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
+	//안녕하새요
 //	@GetMapping("/logout")
 //	public String logout(SessionStatus status) {
 //		status.setComplete();	//세션 종료
