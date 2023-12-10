@@ -1,0 +1,78 @@
+<html lang="kr">
+	<head>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="../static/css/logIn.css">
+    	<style>
+			
+		</style>
+	</head>
+	
+	<body>
+		<header>
+            <div class="headerWrap">
+                <div class="logo">
+                  <a href="index.html"><img src="/img/logo.png" alt="로고"></a>
+                </div>
+          </div>
+        </header>
+        
+        <main>
+          <table class="txtTable">
+            <tr>
+              <th>로그인</th>
+            </tr>
+          </table>
+           <form action="login" method="post">
+             <table class="loginTable">
+               <tr>
+                <th></th>
+                 <td><input name="id" type="text" placeholder="ID" autofocus></td>
+                <th></th>
+               </tr>
+
+               <tr>
+                <th></th>
+                 <td><input name="password" type="password" placeholder="PW"></td>
+                <th></th>
+               </tr>
+             </table>
+             
+             <div class="errMsg" th:text="${errorMessage}"></div>
+
+             <table class="txtTable">      
+               <tr>
+                <th></th>
+                <td>
+					<input class="loginBtn" type="submit" value="로그인"></td>
+                 <td>
+					<a th:href="@{/signUpView}"><input type="button" class="loginBtn" value="회원가입"></a></td>
+                <th></th>
+               </tr>
+             </table>
+           </form>
+        </main>
+        
+        
+        <footer>
+          <div class="footerWrap">
+            <div class="footerLogo">
+              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
+            </div>
+
+            <div class="copy">
+              ⓒ Now there is no place to retreat anymore. ALL RIGHTS RESERVED 
+            </div>
+
+            <div class="YT">
+               <ul> 
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+               </ul>
+            </div>
+          </div>
+        </footer>
+	</body>
+
+
+</html>

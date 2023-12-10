@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+		<title th:text="${product.productTitle} + ' 상세 정보'">상세 정보</title>
+		<script type="text/javascript">
+			//게시물 삭제 알림창
+ 	        function confirmDelete() {
+ 	        	var result = confirm("정말 삭제하시겠습니까?");
+ 	        	return result; // 확인을 누르면 true, 취소를 누르면 false 반환
+	        }      
+	    </script>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="../static/css/productDetail.css">
+    	<style>
+			
+		</style>
+	</head>
+
+	<body>
+	<header>
+            <div class="headerWrap">
+              <div class="logWrap">
+                <div class="logo">
+                  <a href="index.html"><img src="/img/Logo.png" alt="로고"></a>
+                </div>
+                
+                <div class="loginWrap">
+                <!-- 로그인 전 출력 항목 : 로그인, 회원가입 -->
+                <!-- 로그인 후 출력 항목 :  유저이름, 글쓰기, 로그아웃 -->
+                 <div th:if="${session['member'] != null}">
+                    <font th:text="${session['member'].name}">guest</font> 님, 반갑습니다!
+                 </div>
+                  <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
+                  <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
+                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
+                </div>
+              </div>
+
+              <nav role="navigation">
+                  <ul class="menu">
+                    <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='album')}">음반</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='fanLight')}">응원도구</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='photoCard')}">포토카드</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='doll')}">인형/피규어</a></li>
+                  </ul>
+                </nav>
+            </div>
+        </header>
+        
+		<main>
+		  <input name="productId" type ="hidden" th:value ="${product.productId}">
+
+			<div class="btnWrap" th:if="${session['member'] != null and session['member'].id == product.userName}">
+				<a th:href="@{/updateProduct(productId=${product.productId})}" href="insertProduct.html">수정하기</a>
+				<a th:href="@{/deleteProduct(productId=${product.productId})}" onclick="return confirmDelete()">삭제하기</a>
+			</div>
+			
+			<table class="detailTable">
+			  <tr>
+			    <td colspan="2" class="detailTilte"><div th:text="${product.productTitle}">제품 제목</div></td>
+			  </tr>
+			  <tr>
+			    <th rowspan="12">
+			      <div class="detailImg">
+						<img th:src="@{${product.imagePath}}" alt="상품사진">
+					</div>
+			    </th>
+			    <td class="semiTitle">카테고리</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productCategory}"/></td>
+			  </tr>
+			  
+			  <tr class="semiTitle">
+			    <td >등록자</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.userName}"/></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">가격</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productPrice + ' 원'}"/></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">수량</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productQuantity + ' 개'}"/></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">상품 설명</td>
+			  </tr>
+			  <tr>
+			    <td id="productContentTd" class="tableContent"><p th:text="${product.productContent}"></p></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">등록일</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productDate}"/></td>
+			  </tr>
+			</table>
+		</main>
+		
+		<footer>
+          <div class="footerWrap">
+            <div class="footerLogo">
+              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
+            </div>
+
+            <div class="copy">
+              ⓒ Now there is no place to retreat anymore. ALL RIGHTS RESERVED 
+            </div>
+
+            <div class="YT">
+               <ul> 
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+               </ul>
+            </div>
+          </div>
+        </footer>
+	</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script>
+		//상품 설명시 현재 작성 글자수 보여주고, 500자 초과할 경우 초과된 부분 잘라내는 함수
+		function checkLength() {
+			var textarea = document.getElementById("content");
+		    var charCount = document.getElementById("charLength");
+		    var maxLength = parseInt(textarea.getAttribute("maxlength"));
+		    var currentLength = textarea.value.length;
+		
+		    charCount.textContent = currentLength + ' / ' + maxLength;
+		    if (currentLength > maxLength) {	//초과된 부분 잘라내기
+		        textarea.value = textarea.value.substring(0, maxLength);
+		        charCount.textContent = maxLength + ' / ' + maxLength;
+		    }
+		}
+		//로그아웃 알림창
+	    function confirmLogout() {
+	        var result = confirm("로그아웃 하시겠습니까?");
+	        if (result) {
+	            window.location.href = "/logout";
+	        }
+        }
+		</script>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="css/insertProduct.css">
+    	<style>
+			
+		</style>
+	</head>
+	
+	
+	<body>
+	  <header>
+            <div class="headerWrap">
+              <div class="logWrap">
+                <div class="logo">
+                  <a href="index.html"><img src="/img/Logo.png" alt="로고"></a>
+                </div>
+                
+                <div class="loginWrap">
+                <!-- 로그인 전 출력 항목 : 로그인, 회원가입 -->
+                <!-- 로그인 후 출력 항목 :  유저이름, 글쓰기, 로그아웃 -->
+                 <div th:if="${session['member'] != null}">
+                    <font th:text="${session['member'].name}">guest</font> 님, 반갑습니다!
+                 </div>
+                  <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
+                  <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
+                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
+                </div>
+              </div>
+
+              <nav role="navigation">
+                  <ul class="menu">
+                    <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='album')}">음반</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='fanLight')}">응원도구</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='photoCard')}">포토카드</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='doll')}">인형/피규어</a></li>
+                  </ul>
+                </nav>
+            </div>
+        </header>
+        
+		<main>
+           <table class="txtTable">
+            <tr>
+              <th colspan="4">상품 수정</th>
+            </tr>
+          </table>
+           <form action="updateProduct" method="post" enctype="multipart/form-data">
+            <!-- 파일 업로드와 같이 바이너리 데이터를 전송해야 할 경우 enctype="multipart/form-data"-->
+             <div class="mainWrap">
+               <table class="insertTable">
+                 <tr>
+                   <th class="thPaddingTop">제목</th>
+                   <th class="thPaddingTop">상품 설명</th>
+                 </tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="productTitle" th:value="${product.productTitle}" required/>
+                    </td>
+                   <td rowspan="11">
+                    <p id="charLength">0 / 500</p>
+                     <textarea name="productContent" id="content" placeholder="(최대 500자)" th:text="${product.productContent}" cols="50" rows="10" maxlength="500" oninput="checkLength()" required></textarea>
+                   </td>
+                 </tr>
+
+                 <tr>
+                   <th>작성자</th>
+                   
+                 </tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="name" th:value="${currentMember.id}" disabled/>
+                   </td>
+                   
+                 </tr>
+
+                 <tr><th>카테고리</th></tr>
+                 <tr>
+                   <td>
+                     <select class="inputClass" name="productCategory">
+                        <option value="album">음반</option>
+                        <option value="fanLight">응원도구</option>
+                        <option value="photoCard">포토카드</option>
+                        <option value="doll">인형, 피규어</option>
+                    </select>
+                  </td>
+                 </tr>
+
+                 <tr><th>가격</th></tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="productPrice" placeholder="(숫자만 입력)" th:value="${product.productPrice}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required/>
+                   </td>
+                 </tr>
+
+                 <tr><th>수량</th></tr>
+                 <tr>
+                   <td>
+                     <input type="text" class="inputClass" name="productQuantity" placeholder="(최대 999개)" th:value="${product.productQuantity}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)" required/>
+                   </td>
+                 </tr>
+
+                 <tr><th>이미지 등록</th></tr>
+                 <tr>
+                   <td>
+                     <input type="file" class="inputClass" name="uploadFile" accept="image/*"/>
+                   </td>
+                 </tr>
+               </table>
+             </div>
+             <table class="txtTable">      
+               <tr>
+                <th></th>
+                <td>
+					<input type="submit" class="Btn" value="상품 수정하기">
+                </td>
+                 <td>
+					<a th:href ="@{/}"><input type="button" class="Btn" value="메인 페이지"></a>
+                 </td>
+                <th></th>
+               </tr>
+             </table>
+           </form>
+        </main>
+        
+        
+        <footer>
+          <div class="footerWrap">
+            <div class="footerLogo">
+              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
+            </div>
+
+            <div class="copy">
+              ⓒ Now there is no place to retreat anymore. ALL RIGHTS RESERVED 
+            </div>
+
+            <div class="YT">
+               <ul> 
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+               </ul>
+            </div>
+          </div>
+        </footer>	
+
+	</body>
+	</html>

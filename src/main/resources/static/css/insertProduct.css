@@ -1,0 +1,231 @@
+@charset "UTF-8";
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+body{
+  background: #ffffff;
+  color: #1C1819;
+}
+a{
+  text-decoration: none;
+  color: #1C1819;
+  display: block;
+  cursor: pointer;
+}
+
+/*logout style이랑 아이디는 나중에 지우기*/
+/*
+#logout{
+  position: absolute;
+    visibility: hidden;
+}
+*/
+
+header{
+  width: 100%;
+  height: 100px;
+  background: #E1E665;
+}
+.headerWrap{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 1200px;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logWrap{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
+    margin-top: 15px;
+    align-items: center;
+}
+.loginWrap font{font-weight: bold;}
+.loginWrap a{
+  font-size: 12px;
+  line-height: 100%;
+}
+
+/*logo*/
+/*.logo img{width: 200px}*/
+
+.loginWrap{
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+    align-items: center;
+}
+
+/*menu*/
+nav {
+  display: flex; 
+  justify-content: center;
+  width: 100%;
+  z-index: 3;
+}
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu li {
+  float: left;
+  position: relative;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}
+.menu a {
+  color: #1C1819;
+	width: 130px;
+	height: 40px;
+	line-height: 40px;
+  cursor: default;
+}
+.menu a:hover {color: #ffffff}
+.menu li:hover{background-color: #1C1819;}
+.menu > li:hover .subMenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*main*/
+main{
+  width:1200px;
+  margin:0 auto;
+}
+
+/*표 타이틀 부분*/
+.txtTable{ 
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.txtTable th{
+  height: 80px;
+  line-height: 80px;
+  font-size: 30px;
+}
+.txtTable a{margin-left: 30px;}
+
+.mainWrap{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+/*사용자 회원가입 내용 작성 부분*/
+.insertTable{
+  text-align: center;
+  width: 80%;
+  color: black;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  border-collapse: collapse;
+}
+.insertTable th{
+  text-align: left;
+  padding-left: 20px;
+}
+.insertTable tr:first-child{padding-top: 20px;}
+.insertTable td{
+  height: 30px;
+  line-height: 30px;
+  padding-top: 5px;
+  padding-bottom: 25px;
+} 
+
+.insertTable td:first-child{ width: 30%; }
+.insertTable th:first-child{ width: 30%; }
+
+.insertTable p{
+  font-weight: 100;
+  text-align: right;
+  padding-right: 25px;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.insertTable textarea{
+  height: 90%;
+  width: 93%;
+  resize: none;
+  padding: 15px;
+  margin-top: 5px;
+}
+
+.thPaddingTop{padding-top: 30px;}
+
+select{padding-right: 10px;}
+.inputClass{
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+  width: 85%;
+}
+#inputFile{padding-left: 2px;}
+
+
+.Btn{
+  border: none;
+  width: 180px;
+  padding: 8px;
+  background-color: white;
+  color: black;
+  border: solid 2px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.Btn:hover{
+  background-color: rgba(225, 230, 101, 0.7);
+  cursor: pointer;
+}
+
+
+
+/*footer*/
+footer{
+  width: 100%;
+  height: 100px;
+  margin-top: 50px;
+  background: rgb(56, 56, 56);
+}
+.footerWrap{
+  width: 1200px;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+/*footerLogo*/
+.footerLogo{
+  width: 20%;
+  padding-left: 20px;
+}
+/*.footerLogo img{width: 200px;}*/
+
+/*copy*/
+.copy{
+  width: 55%;
+  color: rgb(11,11,11);
+  font-size: 17px;
+  text-align: center;
+}
+
+/*YT*/
+.YT{width: 25%;}
+.YT ul{
+  display: flex;
+  justify-content: space-around;
+}
+.YT img{width: 65px;}
+.YT a:hover{opacity: 0.7}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+	<head>
+		<script>
+		// 비밀번호 일치 확인 함수
+		// 비밀번호가 일치하는 경우에만 회원가입 버튼이 활성화 됨
+        function checkPasswordMatch() {
+            var password = document.getElementsByName("password")[0].value;
+            var passwordCheck = document.getElementsByName("passwordCheck")[0].value;
+
+            var messageElement = document.getElementById("passwordCheckMessage");
+
+            if (password === passwordCheck) {
+                messageElement.innerText = "비밀번호가 일치합니다.";
+                messageElement.style.color = "green";
+                document.getElementById("signUpButton").disabled = false; // 비밀번호 일치 시 버튼 활성화
+            } else {
+                messageElement.innerText = "비밀번호가 다릅니다.";
+                messageElement.style.color = "red";
+                document.getElementById("signUpButton").disabled = true; // 비밀번호 불일치 시 버튼 비활성화
+            }
+        }
+        //로그아웃 알림창
+	    function confirmLogout() {
+	        var result = confirm("로그아웃 하시겠습니까?");
+	        if (result) {
+	            window.location.href = "/logout";
+	        }
+        }
+		
+    	</script><meta charset="utf-8">
+    	<title>Goods</title>
+<!--    	<link th:href="@{/css/signUp.css}" rel="stylesheet">-->
+      <link rel="stylesheet" href="../static/css/signUp.css">
+
+    	
+    	<style>
+            
+        </style>
+	</head>
+	
+	<body>
+        <header>
+            <div class="headerWrap">
+              <div class="logWrap">
+                <div class="logo">
+                  <a href="index.html"><img src="/img/Logo.png" alt="로고"></a>
+                </div>
+                
+                <div class="loginWrap">
+                <!-- 로그인 전 출력 항목 : 로그인, 회원가입 -->
+                <!-- 로그인 후 출력 항목 :  유저이름, 글쓰기, 로그아웃 -->
+                 <div th:if="${session['member'] != null}">
+                    <font th:text="${session['member'].name}">guest</font> 님, 반갑습니다!
+                 </div>
+                  <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
+                  <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
+                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
+                </div>
+              </div>
+
+              <nav role="navigation">
+                  <ul class="menu">
+                    <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
+                    <li><a href="#">음반</a></li>
+                    <li><a href="#">응원도구</a></li>
+                    <li><a href="#">포토카드</a></li>
+                    <li><a href="#">인형/피규어</a></li>
+                  </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <main>
+           <table class="txtTable">
+            <tr>
+              <th colspan="4">회원가입</th>
+            </tr>
+            <tr>
+              <td colspan="4"><sup class="sup">*</sup>표시는 필수 항목입니다.</td>
+            </tr>
+          </table>
+           <form action="signUp" method="post">
+             <table class="singUpTable">
+               <tr>
+                 <td>아이디<sup class="sup">*</sup></td>
+                 <td><input type="text" class="inputClass" name="id" size ="22" required autofocus></td>
+                 <td><input type="button" id="btnId" name="idCheck" value="중복확인" onclick="checkIdAvailability()"></td>
+                 <td colspan="4"><div th:text="${idCheckMessage}"></div></td>
+               </tr>
+
+               <tr>
+                 <td>비밀번호<sup class="sup">*</sup></td>
+                 <td><input type="password" class="inputClass" name="password" oninput="checkPasswordMatch()" size ="22" required></td>
+               </tr>
+               <tr>
+                 <td>비밀번호 확인<sup class="sup">*</sup></td>
+                 <td><input type="password" class="inputClass" name="passwordCheck" oninput="checkPasswordMatch()" size ="22" required></td>
+                 <td></td>
+                 <td colspan="4"><div id="passwordCheckMessage"></div></td>
+                 <td></td>
+               </tr>
+
+               <tr>
+                 <td>이름(닉네임)<sup class="sup">*</sup></td>
+                 <td><input type="text" class="inputClass" name="name" size ="22" required></td>
+               </tr>
+
+               <tr>
+                 <td>전화번호<sup class="sup">*</sup></td>
+                 <td><select class="callClass" name="phone">
+                      <option value="010">010</option>
+                      <option value="011">011</option>
+                      <option value="019">019</option>
+                  </select>-<input type="text" class="callClass" name="phone_m" size="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" required>-<input type="text" class="callClass" name="phone_e" size="4" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" required></td>
+               </tr>
+
+               <tr>
+                 <td>이메일<sup class="sup">*</sup></td>
+                 <td><input size ="22" type="email" class="inputClass" name="email" placeholder="example@gmail.com" required></td>
+               </tr>
+             </table>
+             <table class="txtTable">
+               <tr>
+                 <th colspan="4"><input type="submit" value="회원가입" id=signUpButton disabled></th>
+               </tr>
+             </table>
+           </form>
+        </main>
+        
+        
+        <footer>
+          <div class="footerWrap">
+            <div class="footerLogo">
+              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
+            </div>
+
+            <div class="copy">
+              ⓒ Now there is no place to retreat anymore. ALL RIGHTS RESERVED 
+            </div>
+
+            <div class="YT">
+               <ul> 
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+               </ul>
+            </div>
+          </div>
+        </footer>		
+	</body>
+</html>
