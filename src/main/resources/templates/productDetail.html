@@ -8,6 +8,7 @@
     	<style>
 
 		</style>
+
 		<script type="text/javascript">
 			//게시물 삭제 알림창
  	        function confirmDelete() {
@@ -31,6 +32,7 @@
               <div class="logWrap">
                 <div class="logo">
                   <a href="/"><img src="img/Logo.png" alt="로고"></a>
+
                 </div>
                 
                 <div class="loginWrap">
@@ -59,62 +61,71 @@
             </div>
         </header>
         
-        
-        
-        
-        <main>
-        	<input name="productId" type ="hidden" th:value ="${product.productId}">
-        	<table class="detailTable">
-        		<tr>
-	             <td class="tableTitle" colspan="2"><div th:text="${product.productTitle}">제품 제목</div></td>
-	            </tr>
-        		<tr>
-	             <th rowspan="12">
-	               <div class="tableImg">
-	                  <img th:src="@{${product.imagePath}}" alt="상품사진">
-	                </div>
-	             </th>
-	             <td class="tableSemi">카테고리</td>
-	           </tr>
-	           <tr>
-	             <td class="tableQuer"><p th:text="${product.productCategory}"/></td>
-	           </tr>
-	           <tr><td class="tableSemi">닉네임</td></tr>
-	           <tr>
-	             <td class="tableQuer"><p th:text="${product.userName}"/></td>
-	           </tr>
-	       		<tr><td class="tableSemi">가격</td></tr>
-	           <tr>
-	             <td class="tableQuer"><p th:text="${product.productPrice + ' 원'}"/></td>
-	           </tr>
-	           <tr><td class="tableSemi">수량</td></tr>
-	           <tr>
-	             <td class="tableQuer"><p th:text="${product.productQuantity + ' 개'}"/></td>
-	           </tr>
-	           <tr><td class="tableSemi">설명</td></tr>
-	           <tr>
-	             <td id="tableContent" class="tableQuer"><p th:text="${product.productContent}"/></td>
-	           </tr>
-	           <tr><td class="tableSemi">등록일</td></tr>
-	           <tr>
-	             <td class="tableQuer"><p th:text="${product.productDate}"/></td>
-	           </tr>
-        	</table>
-        	
-        	<!-- 내가 올린 게시물일때만 수정하기, 삭제하기 -->
-        	<div th:if="${session['member'] != null and session['member'].id == product.userName}">
+		<main>
+		  <input name="productId" type ="hidden" th:value ="${product.productId}">
+
+			<div class="btnWrap" th:if="${session['member'] != null and session['member'].id == product.userName}">
 				<a th:href="@{/updateProduct(productId=${product.productId})}" href="insertProduct.html">수정하기</a>
 				<a th:href="@{/deleteProduct(productId=${product.productId})}" onclick="return confirmDelete()">삭제하기</a>
 			</div>
-        	
-        </main>
-        
-      
-
-<footer>
+			
+			<table class="detailTable">
+			  <tr>
+			    <td colspan="2" class="detailTilte"><div th:text="${product.productTitle}">제품 제목</div></td>
+			  </tr>
+			  <tr>
+			    <th rowspan="12">
+			      <div class="detailImg">
+						<img th:src="@{${product.imagePath}}" alt="상품사진">
+					</div>
+			    </th>
+			    <td class="semiTitle">카테고리</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productCategory}"/></td>
+			  </tr>
+			  
+			  <tr class="semiTitle">
+			    <td >등록자</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.userName}"/></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">가격</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productPrice + ' 원'}"/></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">수량</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productQuantity + ' 개'}"/></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">상품 설명</td>
+			  </tr>
+			  <tr>
+			    <td id="productContentTd" class="tableContent"><p th:text="${product.productContent}"></p></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="semiTitle">등록일</td>
+			  </tr>
+			  <tr>
+			    <td class="tableContent"><p th:text="${product.productDate}"/></td>
+			  </tr>
+			</table>
+		</main>
+		
+		<footer>
           <div class="footerWrap">
             <div class="footerLogo">
-              <a href="index.html"><img src="../static/img/footerLogo.png" alt="하단로고"></a>
+              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
             </div>
 
             <div class="copy">
@@ -123,13 +134,13 @@
 
             <div class="YT">
                <ul> 
-                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="img/dream.png" alt="NctDream"></a></li>
-                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="img/chuu.png" alt="Chuu"></a></li>
-                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="img/djj.png" alt="NctDoJaeJung"></a></li>
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+
                </ul>
             </div>
           </div>
         </footer>
-
 	</body>
 </html>
