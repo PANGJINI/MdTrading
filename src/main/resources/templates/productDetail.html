@@ -3,20 +3,104 @@
 	<head>
 	<meta charset="UTF-8">
 		<title th:text="${product.productTitle} + ' 상세 정보'">상세 정보</title>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" href="../static/css/productDetail.css">
+    	<style>
+			
+		</style>
 	</head>
 
 	<body>
-	 	<h1 th:text="${product.productTitle}">제품 제목</h1>
-		<div class="item_detail">
-				<div class="img">
-					<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
-				</div>
-				<p th:text="${'카테고리: ' + product.productCatetory}"/>
-    			<p th:text="${'등록자 닉네임: ' + product.userName}"/>
-    			<p th:text="${'가격: ' + product.productPrice + '원'}"/>
-    			<p th:text="${'수량: ' + product.productQuantity + '개'}"/>
-    			<p th:text="${'설명: ' + product.productContent}"/>
-    			<p th:text="${'등록일: ' + product.productDate}"/>
-		</div>
+       <header>
+            <div class="headerWrap">
+              <div class="logWrap">
+                <div class="logo">
+                  <a href="index.html"><img src="../static/img/Logo.png" alt="로고"></a>
+                </div>
+                
+                <div class="loginWrap">
+                <!-- 로그인 전 출력 항목 : 로그인, 회원가입 -->
+                <!-- 로그인 후 출력 항목 :  유저이름, 글쓰기, 로그아웃 -->
+                 <div th:if="${session['member'] != null}">
+                    <font th:text="${session['member'].name}">guest</font> 님, 반갑습니다!
+                 </div>
+                  <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
+                  <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
+                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a><a th:if="${session['member'] != null}" th:href="@{/insertProduct}" href="insertProduct.html">글쓰기</a>
+                </div>
+              </div>
+
+              <nav role="navigation">
+                  <ul class="menu">
+                    <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
+                    <li><a href="#">음반</a></li>
+                    <li><a href="#">응원도구</a></li>
+                    <li><a href="#">포토카드</a></li>
+                    <li><a href="#">인형/피규어</a></li>
+                  </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <main>
+         <table class="detailTable">
+           <tr>
+             <td class="tableTitle" colspan="2"><div th:text="${product.productTitle}">제품 제목</div></td>
+           </tr>
+           <tr>
+             <th rowspan="12">
+               <div class="tableImg">
+                  <img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+                </div>
+             </th>
+             <td class="tableSemi">카테고리</td>
+           </tr>
+           <tr>
+             <td class="tableQuer"><p th:text="${product.productCatetory}"/></td>
+           </tr>
+           <tr><td class="tableSemi">닉네임</td></tr>
+           <tr>
+             <td class="tableQuer"><p th:text="${product.userName}"/></td>
+           </tr>
+           <tr><td class="tableSemi">가격</td></tr>
+           <tr>
+             <td class="tableQuer"><p th:text="${product.productPrice + ' 원'}"/></td>
+           </tr>
+           <tr><td class="tableSemi">수량</td></tr>
+           <tr>
+             <td class="tableQuer"><p th:text="${product.productQuantity + ' 개'}"/></td>
+           </tr>
+           <tr><td class="tableSemi">설명</td></tr>
+           <tr>
+             <td id="tableContent" class="tableQuer"><p th:text="${product.productContent}"/></td>
+           </tr>
+           <tr><td class="tableSemi">등록일</td></tr>
+           <tr>
+             <td class="tableQuer"><p th:text="${product.productDate}"/></td>
+           </tr>
+         </table>
+          
+        </main>
+        
+        <footer>
+          <div class="footerWrap">
+            <div class="footerLogo">
+              <a href="index.html"><img src="../static/img/footerLogo.png" alt="하단로고"></a>
+            </div>
+
+            <div class="copy">
+              ⓒ Now there is no place to retreat anymore. ALL RIGHTS RESERVED 
+            </div>
+
+            <div class="YT">
+               <ul> 
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="../static/img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="../static/img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="../static/img/djj.png" alt="NctDoJaeJung"></a></li>
+               </ul>
+            </div>
+          </div>
+        </footer>
+	 	
 	</body>
 </html>
