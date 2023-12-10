@@ -3,21 +3,37 @@
 	<head>
 	<meta charset="UTF-8">
 		<title th:text="${product.productTitle} + ' 상세 정보'">상세 정보</title>
+		<script type="text/javascript">
+			//게시물 삭제 알림창
+ 	        function confirmDelete() {
+ 	        	var result = confirm("정말 삭제하시겠습니까?");
+ 	        	return result; // 확인을 누르면 true, 취소를 누르면 false 반환
+	        }      
+	    </script>
 	</head>
 
 	<body>
-	 	<h1 th:text="${product.productTitle}">제품 제목</h1>
-		<div class="item_detail">
-				<div class="img">
-					<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
-				</div>
-				<p th:text="${'카테고리: ' + product.productCategory}"/>
-    			<p th:text="${'등록자 닉네임: ' + product.userName}"/>
-    			<p th:text="${'가격: ' + product.productPrice + '원'}"/>
-    			<p th:text="${'수량: ' + product.productQuantity + '개'}"/>
-    			<p th:text="${'설명: ' + product.productContent}"/>
-    			<p th:text="${'등록일: ' + product.productDate}"/>
-		</div>
+		<form action="updateProduct" method="post">
+		<input name="productId" type ="hidden" th:value ="${product.productId}">
+			<h1 th:text="${product.productTitle}">제품 제목</h1>
+			<div class="item_detail">
+					<div class="img">
+						<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+					</div>
+					<p th:text="${'카테고리: ' + product.productCategory}"/>
+	    			<p th:text="${'등록자 ID: ' + product.userName}"/>
+	    			<p th:text="${'가격: ' + product.productPrice + '원'}"/>
+	    			<p th:text="${'수량: ' + product.productQuantity + '개'}"/>
+	    			<p th:text="${'설명: ' + product.productContent}"/>
+	    			<p th:text="${'등록일: ' + product.productDate}"/>
+			</div>
+			
+			<div th:if="${session['member'] != null and session['member'].id == product.userName}">
+				<input type="submit" value="수정하기"/>
+				<a th:href="@{/deleteProduct(productId=${product.productId})}" onclick="return confirmDelete()">삭제하기</a>
+			</div>
+		</form>
+	 	
 		
 		<div> </div>
 	</body>
