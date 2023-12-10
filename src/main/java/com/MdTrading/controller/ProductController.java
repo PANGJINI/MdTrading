@@ -3,6 +3,7 @@ package com.MdTrading.controller;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,25 +29,26 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	//전체 게시글 보여주기
+	//카테고리 별로 게시글 보여주기
 	@RequestMapping("/getProductList")
-	public String getProductList(Model model) {
-		model.addAttribute("productList", productService.getProductList());
+	public String getProductList(@RequestParam(name = "productCategory", required = false)
+									String productCategory, Model model) {
+		List<Product> productList;
+		if (productCategory != null) {
+            productList = productService.getProductListByCategory(productCategory);
+        } else {
+            productList = productService.getProductList();
+        }
+		model.addAttribute("productList", productList);
+		//model.addAttribute("productList", productService.getProductList());
+		//model.addAttribute("categories", productService.findAllCategories());
+		model.addAttribute("categories", productService.findAllCategories());
+	       
 		return "productList";
 	}
 	
 	
-	//글등록 화면으로 이동
-    @GetMapping("/insertProduct")
-    public String insertProductView(Model model, HttpSession session) {
-    	//세션에서 회원 정보 가져오기
-    	Member currentMember = (Member)session.getAttribute("member");
-    	model.addAttribute("currentMember", currentMember);
-    	
-    	return "insertProduct";
-    }
-    
-    //상세 정보
+    //게시물 상세 정보
     @GetMapping("/getProduct")
     public String getProductDetail(Product product, Model model) {
     	model.addAttribute("product", productService.getProductById(product));
@@ -65,15 +67,25 @@ public class ProductController {
 //    }
     
     
+    //글등록 화면으로 이동
+    @GetMapping("/insertProduct")
+    public String insertProductView(Model model, HttpSession session) {
+    	//세션에서 회원 정보 가져오기
+    	Member currentMember = (Member)session.getAttribute("member");
+    	model.addAttribute("currentMember", currentMember);
+    	
+    	return "insertProduct";
+    }
+    
     
     //게시물 등록하기
     @PostMapping("/insertProduct")
     public ModelAndView insertProduct(Product product, ModelAndView mav, HttpSession session,
     		@RequestParam("imageFile") MultipartFile imageFile) {
 
-    	//세션에서 회원 닉네임 가져와서 Product 테이블의 userName에 넣어주기
+    	//세션에서 회원 ID 가져와서 Product 테이블의 userName에 넣어주기
         Member currentMember = (Member) session.getAttribute("member");
-        product.setUserName(currentMember.getName());
+        product.setUserName(currentMember.getId());
         
         //이미지파일 byte로 변환하여 저장
         try {
@@ -91,6 +103,22 @@ public class ProductController {
     			
     	return mav;
     }
+    
+    
+    //게시물 수정
+    @PostMapping("/updateProduct")
+    public String updateProduct(Product product) {
+    	productService.updateProduct(product);
+    	return "/";
+    } 
+    
+    //게시물 삭제
+    @GetMapping("/deleteProduct")
+    public String deleteProduct(Product product) {
+    	productService.deleteProduct(product);
+    	return "redirect:/";
+    }
+    
     
    
     

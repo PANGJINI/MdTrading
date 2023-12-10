@@ -20,7 +20,13 @@
                 document.getElementById("signUpButton").disabled = true; // 비밀번호 불일치 시 버튼 비활성화
             }
         }
-		
+        //로그아웃 알림창
+	    function confirmLogout() {
+	        var result = confirm("로그아웃 하시겠습니까?");
+	        if (result) {
+	            window.location.href = "/logout";
+	        }
+        }
 		
     	</script><meta charset="utf-8">
     	<title>Goods</title>

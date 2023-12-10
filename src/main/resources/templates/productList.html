@@ -2,10 +2,23 @@
 
 	<head>
     	<meta charset="utf-8">
+<<<<<<< HEAD
     	<link rel="stylesheet" href="../static/css/productList.css">
 		<style>
 			
 		</style>
+=======
+    	<link rel="stylesheet" href="css/productList.css">
+		<script>
+		//로그아웃 알림창
+	    function confirmLogout() {
+	        var result = confirm("로그아웃 하시겠습니까?");
+	        if (result) {
+	            window.location.href = "/logout";
+	        }
+        }
+		</script>
+>>>>>>> main
 		
 	</head>
 	
@@ -33,10 +46,10 @@
               <nav role="navigation">
                   <ul class="menu">
                     <li><a href="#" th:href="@{/getProductList}">전체 상품</a></li>
-                    <li><a href="#">음반</a></li>
-                    <li><a href="#">응원도구</a></li>
-                    <li><a href="#">포토카드</a></li>
-                    <li><a href="#">인형/피규어</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='album')}">음반</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='fanLight')}">응원도구</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='photoCard')}">포토카드</a></li>
+                    <li><a href="#" th:href="@{/getProductList(productCategory='doll')}">인형/피규어</a></li>
                   </ul>
                 </nav>
             </div>
