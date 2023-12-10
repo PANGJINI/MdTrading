@@ -21,7 +21,7 @@
             <div class="headerWrap">
               <div class="logWrap">
                 <div class="logo">
-                  <a href="index.html"><img src="/img/Logo.png" alt="로고"></a>
+                  <a href="index.html"><img src="img/Logo.png" alt="로고"></a>
                 </div>
                 
                 <div class="loginWrap">
@@ -32,7 +32,7 @@
                  </div>
                   <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
                   <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
-                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
+                  <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a><a th:if="${session['member'] != null}" th:href="@{/insertProduct}" href="insertProduct.html">글쓰기</a>
                 </div>
               </div>
 
@@ -49,6 +49,9 @@
         </header>
         
         <main>
+         <div class="witerWrap">
+           <a th:if="${session['member'] != null}" th:href="@{/insertProduct}" href="insertProduct.html"><div class="witer">글쓰기</div></a>
+         </div>
           <div class="item_list">
               <div class="card" th:each="product, state:${productList}">
                   <div class="productImg">
@@ -80,7 +83,7 @@
 		<footer>
           <div class="footerWrap">
             <div class="footerLogo">
-              <a href="index.html"><img src="/img/footerLogo.png" alt="하단로고"></a>
+              <a href="index.html"><img src="img/footerLogo.png" alt="하단로고"></a>
             </div>
 
             <div class="copy">
@@ -89,9 +92,9 @@
 
             <div class="YT">
                <ul> 
-                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="/img/dream.png" alt="NctDream"></a></li>
-                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="/img/chuu.png" alt="Chuu"></a></li>
-                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="/img/djj.png" alt="NctDoJaeJung"></a></li>
+                 <li><a href="https://youtu.be/XDnGdcgd3Pc?si=OOuCtTrEJ8d3Fldl" target="_blank"><img src="img/dream.png" alt="NctDream"></a></li>
+                 <li><a href="https://youtu.be/ZBl48MK17cI?si=5SZ6cF6--QntgY-V" target="_blank"><img src="img/chuu.png" alt="Chuu"></a></li>
+                 <li><a href="https://youtu.be/7nRiE4sLLxE?si=p4iding45FxS0s63" target="_blank"><img src="img/djj.png" alt="NctDoJaeJung"></a></li>
                </ul>
             </div>
           </div>
