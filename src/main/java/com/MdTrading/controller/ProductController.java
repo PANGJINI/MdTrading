@@ -2,15 +2,24 @@ package com.MdTrading.controller;
 
 
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +34,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ProductController {
-	
+    
 	@Autowired
 	private ProductService productService;
 	
@@ -54,17 +63,6 @@ public class ProductController {
     	model.addAttribute("product", productService.getProductById(product));
     	return "productDetail";
     }
-//    public String productDetail(@PathVariable int productId, Model model) {
-//    	
-//        // productId에 해당하는 제품 정보를 데이터베이스에서 가져오기
-//        Product product = productService.getProductById(productId);
-//
-//        // 제품 정보를 모델에 추가하여 뷰로 전달
-//        model.addAttribute("product", product);
-//
-//        // 상세 페이지 뷰의 이름 반환
-//        return "productDetail";
-//    }
     
     
     //글등록 화면으로 이동
@@ -81,20 +79,19 @@ public class ProductController {
     //게시물 등록하기
     @PostMapping("/insertProduct")
     public ModelAndView insertProduct(Product product, ModelAndView mav, HttpSession session,
-    		@RequestParam("imageFile") MultipartFile imageFile) {
+    		@RequestParam("uploadFile") MultipartFile uploadFile) throws Exception{
 
     	//세션에서 회원 ID 가져와서 Product 테이블의 userName에 넣어주기
         Member currentMember = (Member) session.getAttribute("member");
         product.setUserName(currentMember.getId());
         
-        //이미지파일 byte로 변환하여 저장
-        try {
-            product.setProductImage(imageFile.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-            // 에러 처리 로직 추가
-        }
-    	
+        //파일업로드처리
+    	if(!uploadFile.isEmpty()) {
+    		String fileName =uploadFile.getOriginalFilename();
+    		uploadFile.transferTo(new File("D:/spring_workspace/MD-trading/src/main/resources/static/fileio/"+fileName));	//물리경로에 이미지 저장
+    		product.setImagePath("/fileio/"+fileName);	//이미지 파일 경로 저장
+    	}
+    
     	productService.insertProduct(product);
     	
     	// 게시물 등록 완료시 alert 메시지 보여주고 메인으로 이동 

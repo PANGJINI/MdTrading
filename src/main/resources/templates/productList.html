@@ -52,7 +52,8 @@
           <div class="item_list">
               <div class="card" th:each="product, state:${productList}">
                   <div class="productImg">
-                      <img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+                      <img th:src="@{${product.imagePath}}" alt="상품사진">
+                      <!-- <img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진"> -->
                       <!-- "'data:image/jpeg;base64,'+${playerImg}" -->
                   </div>
                   <table class="productText">

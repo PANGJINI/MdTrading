@@ -13,12 +13,11 @@
 	</head>
 
 	<body>
-		<form action="updateProduct" method="post">
 		<input name="productId" type ="hidden" th:value ="${product.productId}">
 			<h1 th:text="${product.productTitle}">제품 제목</h1>
 			<div class="item_detail">
 					<div class="img">
-						<img th:src="@{'data:image/jpg;base64,' + #strings.bytes(product.productImage)}" alt="상품사진">
+						<img th:src="@{${product.imagePath}}" alt="상품사진">
 					</div>
 					<p th:text="${'카테고리: ' + product.productCategory}"/>
 	    			<p th:text="${'등록자 ID: ' + product.userName}"/>
@@ -29,12 +28,9 @@
 			</div>
 			
 			<div th:if="${session['member'] != null and session['member'].id == product.userName}">
-				<input type="submit" value="수정하기"/>
+				<a th:href="@{/insertProduct(productId=${product.productId})}" href="insertProduct.html">수정하기</a>
 				<a th:href="@{/deleteProduct(productId=${product.productId})}" onclick="return confirmDelete()">삭제하기</a>
 			</div>
-		</form>
-	 	
-		
-		<div> </div>
+
 	</body>
 </html>

@@ -25,8 +25,9 @@ public class Product {
 	private String productQuantity;		//상품 수량
 	private String productContent;		//상품 설명
 	private Date productDate = new Date();	//상품 등록일
-	@Lob
-    private byte[] productImage; 		//상품 이미지 (바이트 배열로 저장)
+	private String imagePath; // 이미지 파일 경로를 저장할 필드 추가
+	//@Lob
+    //private byte[] productImage; 		//상품 이미지 (바이트 배열로 저장)
     @Transient
     private MultipartFile imageFile; 	//업로드된 이미지를 임시로 저장하는 필드
 

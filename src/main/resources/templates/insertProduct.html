@@ -79,11 +79,11 @@
                  </tr>
                  <tr>
                    <td>
-                     <input type="text" class="inputClass" name="productTitle"/>
+                     <input type="text" class="inputClass" name="productTitle" required/>
                     </td>
                    <td rowspan="11">
                     <p id="charLength">0 / 500</p>
-                     <textarea name="productContent" id="content" placeholder="(최대 500자)" cols="50" rows="10" maxlength="500" oninput="checkLength()"></textarea>
+                     <textarea name="productContent" id="content" placeholder="(최대 500자)" cols="50" rows="10" maxlength="500" oninput="checkLength()" required></textarea>
                    </td>
                  </tr>
 
@@ -113,21 +113,21 @@
                  <tr><th>가격</th></tr>
                  <tr>
                    <td>
-                     <input type="text" class="inputClass" name="productPrice" placeholder="(숫자만 입력)" oninput="this.value = this.value.replace(/[^0-9]/g, '')"/>
+                     <input type="text" class="inputClass" name="productPrice" placeholder="(숫자만 입력)" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required/>
                    </td>
                  </tr>
 
                  <tr><th>수량</th></tr>
                  <tr>
                    <td>
-                     <input type="text" class="inputClass" name="productQuantity" placeholder="(최대 999개)" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)"/>
+                     <input type="text" class="inputClass" name="productQuantity" placeholder="(최대 999개)" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)" required/>
                    </td>
                  </tr>
 
                  <tr><th>이미지 등록</th></tr>
                  <tr>
                    <td>
-                     <input type="file"  id="inputFile" class="inputClass" name="imageFile" accept="image/*"/>
+                     <input type="file" class="inputClass" name="uploadFile" accept="image/*"/>
                    </td>
                  </tr>
                </table>
