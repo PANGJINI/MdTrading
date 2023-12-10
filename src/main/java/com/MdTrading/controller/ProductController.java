@@ -102,11 +102,21 @@ public class ProductController {
     }
     
     
+    //글 수정 화면으로 이동
+    @GetMapping("/updateProduct")
+    public String updateProductView(Product product, Model model, HttpSession session) {
+    	//세션에서 회원 정보 가져오기
+    	Member currentMember = (Member)session.getAttribute("member");
+    	model.addAttribute("currentMember", currentMember);
+    	model.addAttribute("product", productService.getProductById(product));
+    	return "updateProduct";
+    }
+    
     //게시물 수정
     @PostMapping("/updateProduct")
     public String updateProduct(Product product) {
     	productService.updateProduct(product);
-    	return "/";
+    	return "redirect:/";
     } 
     
     //게시물 삭제

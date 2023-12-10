@@ -28,7 +28,7 @@
 			</div>
 			
 			<div th:if="${session['member'] != null and session['member'].id == product.userName}">
-				<a th:href="@{/insertProduct(productId=${product.productId})}" href="insertProduct.html">수정하기</a>
+				<a th:href="@{/updateProduct(productId=${product.productId})}" href="insertProduct.html">수정하기</a>
 				<a th:href="@{/deleteProduct(productId=${product.productId})}" onclick="return confirmDelete()">삭제하기</a>
 			</div>
 

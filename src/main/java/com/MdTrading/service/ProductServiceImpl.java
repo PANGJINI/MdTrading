@@ -22,9 +22,14 @@ public class ProductServiceImpl implements ProductService {
 	//상품 수정하기
 	public void updateProduct(Product product) {
 		 Product productfind = productRepo.findById(product.getProductId()).get();
-		 //productfind.setTitle(product.getTitle());
-		 //productfind.setContent(product.getContent());
-		 productRepo.save(productfind);//modify한다.
+		 productfind.setProductTitle(product.getProductTitle());
+		 productfind.setProductCategory(product.getProductCategory());
+		 productfind.setProductPrice(product.getProductPrice());
+		 productfind.setProductQuantity(product.getProductQuantity());
+		 productfind.setProductContent(product.getProductContent());
+		 productfind.setImagePath(product.getImagePath());
+		 
+		 productRepo.save(productfind);
 	 }
 	
 	//상품 삭제하기
