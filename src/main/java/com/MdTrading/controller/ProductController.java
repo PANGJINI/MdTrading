@@ -42,6 +42,7 @@ public class ProductController {
 	@RequestMapping("/getProductList")
 	public String getProductList(@RequestParam(name = "productCategory", required = false)
 									String productCategory, Model model) {
+		//카테고리가 지정되어 있으면 해당 카테고리의 상품 목록을 가져오고, 그렇지 않으면 전체 상품 목록을 가져옴
 		List<Product> productList;
 		if (productCategory != null) {
             productList = productService.getProductListByCategory(productCategory);
@@ -49,8 +50,6 @@ public class ProductController {
             productList = productService.getProductList();
         }
 		model.addAttribute("productList", productList);
-		//model.addAttribute("productList", productService.getProductList());
-		//model.addAttribute("categories", productService.findAllCategories());
 		model.addAttribute("categories", productService.findAllCategories());
 	       
 		return "productList";
@@ -87,9 +86,12 @@ public class ProductController {
         
         //파일업로드처리
     	if(!uploadFile.isEmpty()) {
+    		//원본 파일명 가져오기
     		String fileName =uploadFile.getOriginalFilename();
-    		uploadFile.transferTo(new File("D:/spring_workspace/MD-trading/src/main/resources/static/fileio/"+fileName));	//물리경로에 이미지 저장
-    		product.setImagePath("/fileio/"+fileName);	//이미지 파일 경로 저장
+    		//지정된 경로에 파일 저장
+    		uploadFile.transferTo(new File("D:/spring_workspace/MD-trading/src/main/resources/static/fileio/"+fileName));
+    		//DB에 이미지파일 경로 저장
+    		product.setImagePath("/fileio/"+fileName);
     	}
     
     	productService.insertProduct(product);
@@ -108,6 +110,7 @@ public class ProductController {
     	//세션에서 회원 정보 가져오기
     	Member currentMember = (Member)session.getAttribute("member");
     	model.addAttribute("currentMember", currentMember);
+    	//수정할 상품 정보를 model에 추가
     	model.addAttribute("product", productService.getProductById(product));
     	return "updateProduct";
     }

@@ -9,9 +9,10 @@ import com.MdTrading.domain.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	//모든 카테고리 가져오기
-	//@Query("SELECT DISTINCT product_Category FROM Product")
+	//카테고리를 가져오는 쿼리
 	@Query("SELECT DISTINCT productCategory FROM Product")
 	List<String> findAllCategories();
+	
+	//카테고리별로 상품을 찾기 위한 쿼리
 	List<Product> findByProductCategory(String productCategory);
 }

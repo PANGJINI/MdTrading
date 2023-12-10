@@ -10,9 +10,9 @@ import lombok.Data;
 @Table
 public class Member {
 	@Id
-	private String id;
-	private String password;
-	private String name;
-	private String phone;
-	private String email;
+	private String id;			//회원ID
+	private String password;	//비밀번호
+	private String name;		//닉네임
+	private String phone;		//연락처
+	private String email;		//이메일
 }
