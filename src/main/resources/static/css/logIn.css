@@ -82,12 +82,12 @@ main{
 }
 .loginTable td{
   width: 33.3%;
-  
+
 }
 .loginTable tr{ 
   height: 50px;
   line-height: 50px;
-  
+
 }
 .loginTable input{
   font-size: 15px;
@@ -98,7 +98,7 @@ main{
   width: 100%;
   text-align: center;
 }
- 
+
 .loginBtn{
   border: none;
   width: 180px;

@@ -43,7 +43,7 @@
             <div class="headerWrap">
               <div class="logWrap">
                 <div class="logo">
-                  <a href="index.html"><img src="/img/Logo.png" alt="로고"></a>
+                  <a href="/"><img src="/img/Logo.png" alt="로고"></a>
                 </div>
                 
                 <div class="loginWrap">
@@ -55,6 +55,7 @@
                   <a th:if="${session['member'] == null}" th:href="@{/signUpView}" href="signUp.html">회원가입</a>
                   <a th:if="${session['member'] == null}" th:href="@{/loginView}" href="login.html">로그인</a>
                   <a id = "logout" th:if="${session['member'] != null}" onclick="confirmLogout()">로그아웃</a>
+                  <a th:if="${session['member'] != null}" th:href="@{/insertProduct}" href="insertProduct.html">글쓰기</a>
                 </div>
               </div>
 
